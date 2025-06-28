@@ -1,0 +1,82 @@
+<!-- Special Days Section (13-Month Calendar Only) -->
+<div *ngIf="is13Month" class="mb-6">
+  <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+    <div class="bg-gradient-to-r from-purple-600 to-pink-600 px-4 py-3">
+      <h3 class="text-sm font-semibold text-white flex items-center gap-2">
+        <app-icon name="moon" [size]="16" className="text-white"></app-icon>
+        Special Days
+        <app-icon name="sun" [size]="16" className="text-white"></app-icon>
+      </h3>
+    </div>
+
+    <div class="p-4">
+      <div class="grid gap-3 sm:grid-cols-2">
+        <div
+          *ngFor="let dayName of getSpecialDays(); let i = index; trackBy: trackBySpecialDay"
+          [class]="getSpecialDayClass(i)"
+          (click)="onSelectSpecialDay(i, dayName)"
+        >
+          <div class="flex items-center gap-3">
+            <div class="flex-shrink-0 w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+              <app-icon
+                [name]="i === 0 ? 'sun' : 'calendar'"
+                [size]="16"
+                className="text-purple-600"
+              ></app-icon>
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <div class="font-medium text-sm text-gray-900 mb-1">{{ dayName }}</div>
+
+              <div class="space-y-1">
+                <div
+                  *ngFor="let event of getSpecialDayEvents(i).slice(0, 2)"
+                  class="text-xs bg-white border border-gray-200 rounded px-2 py-1 truncate cursor-pointer hover:bg-blue-50 transition-colors"
+                  (click)="$event.stopPropagation(); onEditEvent(event)"
+                >
+                  <span *ngIf="event.time" class="text-gray-500 font-medium">{{ event.time }}</span>
+                  <span class="text-gray-800 ml-1">{{ event.title }}</span>
+                </div>
+
+                <div *ngIf="getSpecialDayEvents(i).length > 2" class="text-xs text-gray-500 font-medium">
+                  +{{ getSpecialDayEvents(i).length - 2 }} more events
+                </div>
+
+                <div *ngIf="getSpecialDayEvents(i).length === 0" class="text-xs text-gray-400">
+                  No events
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Calendar Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 auto-rows-max">
+  <app-month-grid
+    *ngFor="let monthIndex of getMonthsArray(); trackBy: trackByMonth"
+    [monthIndex]="monthIndex"
+    [monthName]="getMonthName(monthIndex)"
+    [weekDays]="getWeekDays(monthIndex)"
+    [emptyCells]="getEmptyCells(monthIndex)"
+    [days]="getDays(monthIndex)"
+    [selectedDate]="selectedDate"
+    [events]="getAllEvents()"
+    [is13Month]="is13Month"
+    [currentYear]="currentYear"
+    (selectDate)="onSelectDate($event)"
+    (editEvent)="onEditEvent($event)"
+    class="calendar-month"
+  ></app-month-grid>
+</div>
+
+<!-- Loading State (if needed) -->
+<div *ngIf="getMonthsArray().length === 0" class="flex items-center justify-center py-12">
+  <div class="text-center">
+    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-slate-900 mx-auto mb-4"></div>
+    <p class="text-gray-500">Loading calendar...</p>
+  </div>
+</div>

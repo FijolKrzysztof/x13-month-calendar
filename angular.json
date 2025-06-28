@@ -18,6 +18,7 @@
           "builder": "@angular/build:application",
           "options": {
             "browser": "src/main.ts",
+            "baseHref": "/13-month-calendar/",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -87,5 +88,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "d6570229-a8ca-4f24-b2f4-f79db9107b64"
   }
 }

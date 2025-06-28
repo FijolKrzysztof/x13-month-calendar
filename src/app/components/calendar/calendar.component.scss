@@ -1,0 +1,292 @@
+.calendar-grid {
+  display: grid;
+  gap: 1rem;
+
+  // Responsive grid
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 1280px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.calendar-month {
+  height: fit-content;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  transition: all 0.2s ease;
+}
+
+.special-days {
+  background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+
+  .special-day-item {
+    backdrop-filter: blur(8px);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-1px);
+    }
+
+    transition: all 0.15s ease;
+  }
+}
+
+.loading-spinner {
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  animation: spin 1s linear infinite;
+}
+
+// Staggered animation for months
+.calendar-month {
+  animation: fadeInUp 0.5s ease-out;
+  animation-fill-mode: both;
+
+  @for $i from 1 through 13 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.05}s;
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Special responsive behavior for mobile
+@media (max-width: 640px) {
+  .calendar-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .special-days {
+    margin-bottom: 1rem;
+
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Enhanced special days styling
+.special-days-container {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    opacity: 0.1;
+    animation: movePattern 20s linear infinite;
+  }
+}
+
+@keyframes movePattern {
+  0% { background-position: 0 0, 0 10px, 10px -10px, -10px 0px; }
+  100% { background-position: 20px 20px, 20px 30px, 30px 10px, 10px 20px; }
+}
+
+.special-day-icon {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.2) rotate(10deg);
+  }
+}
+
+// Month grid enhancements
+.month-container {
+  position: relative;
+
+  &.sol-month {
+    .month-header {
+      background: linear-gradient(135deg, #1e293b 0%, #7c3aed 50%, #ec4899 100%);
+      position: relative;
+
+      &::after {
+        content: '✨';
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        animation: sparkle 2s ease-in-out infinite;
+      }
+    }
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2);
+  }
+}
+
+// Calendar grid auto-sizing
+.calendar-grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+// Smooth transitions for layout changes
+.calendar-container {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Month hover effects
+.month-card {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+
+  &:hover::before {
+    left: 100%;
+  }
+}
+
+// Loading skeleton
+.month-skeleton {
+  .skeleton-header {
+    height: 3rem;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  .skeleton-grid {
+    height: 200px;
+    background: linear-gradient(90deg, #f8f8f8 25%, #e8e8e8 50%, #f8f8f8 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    animation-delay: 0.2s;
+  }
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+// Focus and accessibility
+.calendar-month:focus-within {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.special-day-item:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+// Print styles
+@media print {
+  .calendar-month {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+  }
+
+  .special-days {
+    break-after: page;
+    background: white !important;
+    color: black !important;
+    border: 2px solid #000 !important;
+
+    * {
+      color: black !important;
+    }
+  }
+
+  .month-header {
+    background: white !important;
+    color: black !important;
+    border-bottom: 1px solid #000 !important;
+  }
+}
+
+// Reduced motion preferences
+@media (prefers-reduced-motion: reduce) {
+  .calendar-month {
+    animation: none;
+  }
+
+  .special-day-icon,
+  .month-card::before,
+  .special-days-container::before {
+    animation: none;
+    transition: none;
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .calendar-month {
+    border: 2px solid;
+  }
+
+  .special-days {
+    border: 3px solid;
+    background: none !important;
+  }
+
+  .month-header {
+    background: black !important;
+    color: white !important;
+  }
+}

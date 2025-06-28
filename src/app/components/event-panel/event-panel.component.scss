@@ -1,0 +1,92 @@
+.slide-in-right {
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.event-item {
+  &:hover {
+    .delete-button {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .edit-hint {
+      opacity: 1;
+    }
+  }
+
+  .delete-button {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.15s ease;
+  }
+
+  .edit-hint {
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+}
+
+.event-icon {
+  transition: all 0.15s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.scroll-area {
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 2px;
+
+    &:hover {
+      background: #94a3b8;
+    }
+  }
+}
+
+.empty-state {
+  svg {
+    transition: all 0.3s ease;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
+    color: #3b82f6;
+  }
+}
+
+@media (max-width: 640px) {
+  .event-panel {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    max-width: none;
+  }
+}

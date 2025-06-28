@@ -1,0 +1,52 @@
+<div class="bg-white rounded-lg border border-gray-200 shadow-sm">
+  <div [class]="getMonthHeaderClass()">
+    {{ monthName }}
+  </div>
+  <div class="p-3">
+    <div class="grid grid-cols-7 gap-px mb-2">
+      <div
+        *ngFor="let day of weekDays"
+        class="text-center text-xs font-medium text-gray-500 py-2 uppercase"
+      >
+        {{ day }}
+      </div>
+    </div>
+    <div class="grid grid-cols-7 gap-px bg-gray-100">
+      <!-- Empty cells for regular calendar -->
+      <div
+        *ngFor="let empty of emptyCells"
+        class="min-h-16 p-2 border border-transparent"
+      ></div>
+
+      <!-- Actual days -->
+      <div
+        *ngFor="let day of days"
+        [class]="getDayClass(day)"
+        (click)="onSelectDate(day)"
+      >
+        <div [class]="getDayNumberClass(day)">
+          <span class="text-sm font-medium">{{ day }}</span>
+          <app-icon
+            *ngIf="isToday(day)"
+            name="sun"
+            [size]="12"
+            className="text-amber-600"
+          ></app-icon>
+        </div>
+        <div class="space-y-1">
+          <div
+            *ngFor="let event of getDayEvents(day).slice(0, 2)"
+            class="text-xs bg-white border border-gray-200 rounded px-2 py-1 truncate cursor-pointer hover:bg-blue-50 transition-colors event-item"
+            (click)="onEditEvent(event, $event)"
+          >
+            <span *ngIf="event.time" class="text-gray-500 font-medium">{{ event.time }}</span>
+            <span class="text-gray-800 ml-1">{{ event.title }}</span>
+          </div>
+          <div *ngIf="getDayEvents(day).length > 2" class="text-xs text-gray-500 font-medium">
+            +{{ getDayEvents(day).length - 2 }} more
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

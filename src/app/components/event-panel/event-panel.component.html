@@ -1,0 +1,115 @@
+@if (show) {
+  <div class="fixed bottom-6 right-6 bg-white border border-gray-200 rounded-xl shadow-xl max-w-sm w-full mx-4 sm:mx-0 transform transition-all duration-200 slide-in-right">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4 border-b border-gray-100">
+      <div class="flex-1">
+        <h3 class="font-semibold text-gray-900 text-sm">
+          {{ selectedDateTitle }}
+        </h3>
+        <p class="text-xs text-gray-500 mt-0.5">
+          {{ events.length }} {{ events.length === 1 ? 'event' : 'events' }}
+        </p>
+      </div>
+      <div class="flex items-center gap-1">
+        <button
+          (click)="onOpenEventModal()"
+          class="bg-slate-900 text-white p-2 rounded-lg hover:bg-slate-800 transition-colors shadow-sm"
+          title="Add new event"
+        >
+          <app-icon name="plus" [size]="16"></app-icon>
+        </button>
+        <button
+          (click)="onClose()"
+          class="text-gray-400 hover:text-gray-600 transition-colors p-2 rounded-lg hover:bg-gray-100"
+          title="Close panel"
+        >
+          <app-icon name="x" [size]="16"></app-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Events List -->
+    <div class="max-h-64 overflow-y-auto">
+      @if (events.length === 0) {
+        <div class="p-6 text-center">
+          <div class="text-gray-300 mb-2">
+            <app-icon name="calendar" [size]="32" className="mx-auto"></app-icon>
+          </div>
+          <p class="text-gray-500 text-sm">No events scheduled</p>
+          <button
+            (click)="onOpenEventModal()"
+            class="text-blue-600 hover:text-blue-700 text-sm font-medium mt-2 transition-colors"
+          >
+            Add your first event
+          </button>
+        </div>
+      } @else {
+        <div class="p-2 space-y-2">
+          @for (event of events; track event.id) {
+            <div
+              class="group flex items-start gap-3 p-3 rounded-lg border border-gray-100 hover:border-gray-200 hover:bg-gray-50 transition-all duration-150 cursor-pointer"
+              (click)="onEditEvent(event)"
+            >
+              <!-- Event Icon -->
+              <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mt-0.5">
+                <app-icon
+                  [name]="getEventTypeIcon(event)"
+                  [size]="14"
+                  className="text-blue-600"
+                ></app-icon>
+              </div>
+
+              <!-- Event Content -->
+              <div class="flex-1 min-w-0">
+                <div class="flex items-start justify-between">
+                  <h4 class="font-medium text-gray-900 text-sm truncate pr-2">
+                    {{ event.title }}
+                  </h4>
+                  <button
+                    (click)="onRemoveEvent(event.id, $event)"
+                    class="opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-600 transition-all duration-150 p-1 rounded hover:bg-red-50"
+                    title="Delete event"
+                  >
+                    <app-icon name="x" [size]="12"></app-icon>
+                  </button>
+                </div>
+
+                @if (event.time) {
+                  <div class="flex items-center gap-1 mt-1 text-xs text-gray-500">
+                    <app-icon name="clock" [size]="12"></app-icon>
+                    <span>{{ formatEventTime(event.time) }}</span>
+                  </div>
+                }
+
+                @if (event.description) {
+                  <p class="text-xs text-gray-600 mt-1 line-clamp-2">
+                    {{ event.description }}
+                  </p>
+                }
+
+                <div class="text-xs text-blue-600 mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  Click to edit
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Quick Actions Footer -->
+    @if (events.length > 0) {
+      <div class="border-t border-gray-100 p-3">
+        <div class="flex items-center justify-between text-xs text-gray-500">
+          <span>{{ events.length }} events total</span>
+          <button
+            (click)="onOpenEventModal()"
+            class="text-blue-600 hover:text-blue-700 font-medium transition-colors"
+          >
+            Add another
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+}

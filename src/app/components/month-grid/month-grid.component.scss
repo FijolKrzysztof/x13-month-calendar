@@ -1,0 +1,36 @@
+.calendar-day {
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  transition: all 0.15s ease;
+}
+
+.event-item {
+  &:hover {
+    background-color: #eff6ff !important;
+    border-color: #93c5fd;
+  }
+
+  transition: all 0.15s ease;
+}
+
+.month-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.day-grid {
+  min-height: 200px;
+}
+
+.sol-month {
+  background: linear-gradient(135deg, #1e293b, #334155);
+
+  .month-name {
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
