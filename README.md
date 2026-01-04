@@ -1,59 +1,60 @@
-# X13MonthCalendar
+# 📅 13-Month Calendar
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.4.
+[![Angular Version](https://img.shields.io/badge/Angular-20.0.4-DD0031.svg?style=flat-square&logo=angular)](https://angular.dev/)
+[![GitHub Live Demo](https://img.shields.io/badge/Demo-Live-brightgreen?style=flat-square&logo=github)](https://fijolkrzysztof.github.io/x13-month-calendar/)
 
-## Development server
+A modern web application built with **Angular 20** that implements the concept of the **International Fixed Calendar** (the 13-month calendar system).
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 🚀 Live Demo
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The application is deployed and available at:  
+👉 **[fijolkrzysztof.github.io/x13-month-calendar/](https://fijolkrzysztof.github.io/x13-month-calendar/)**
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📖 About the Project
 
-```bash
-ng generate component component-name
-```
+This calendar system proposes a year of 13 months, each having exactly 28 days. Every month begins on a Sunday and ends on a Saturday, making the calendar perfectly perpetual.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Key Features
+* **Fixed Structure** – Every month is identical, simplifying long-term planning.
+* **Modern Stack** – Built using the latest Angular 20 features.
+* **Responsive** – Works seamlessly on mobile and desktop.
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## 🛠 Getting Started
 
-To build the project run:
+### Prerequisites
+* Node.js (Latest LTS recommended)
+* Angular CLI
 
-```bash
-ng build
-```
+🛠 Installation & Setup
+To run this project locally, follow these steps:
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Clone the repository git clone https://github.com/fijolkrzysztof/x13-month-calendar.git
 
-## Running unit tests
+Install dependencies cd x13-month-calendar npm install
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Start the development server ng serve
 
-```bash
-ng test
-```
+Once started, open your browser and navigate to: http://localhost:4200/
 
-## Running end-to-end tests
+🏗 CLI Commands
+Run App: ng serve
 
-For end-to-end (e2e) testing, run:
+Production Build: ng build
 
-```bash
-ng e2e
-```
+Generate Component: ng generate component name
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Run Unit Tests: ng test
 
-## Additional Resources
+Run E2E Tests: ng e2e
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+📚 Resources
+Angular CLI Documentation
+
+International Fixed Calendar (Wikipedia)
+   git clone https://github.com/fijolkrzysztof/x13-month-calendar.git
