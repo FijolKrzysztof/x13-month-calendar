@@ -22,39 +22,3 @@ This calendar system proposes a year of 13 months, each having exactly 28 days. 
 * **Fixed Structure** – Every month is identical, simplifying long-term planning.
 * **Modern Stack** – Built using the latest Angular 20 features.
 * **Responsive** – Works seamlessly on mobile and desktop.
-
----
-
-## 🛠 Getting Started
-
-### Prerequisites
-* Node.js (Latest LTS recommended)
-* Angular CLI
-
-🛠 Installation & Setup
-To run this project locally, follow these steps:
-
-Clone the repository git clone https://github.com/fijolkrzysztof/x13-month-calendar.git
-
-Install dependencies cd x13-month-calendar npm install
-
-Start the development server ng serve
-
-Once started, open your browser and navigate to: http://localhost:4200/
-
-🏗 CLI Commands
-Run App: ng serve
-
-Production Build: ng build
-
-Generate Component: ng generate component name
-
-Run Unit Tests: ng test
-
-Run E2E Tests: ng e2e
-
-📚 Resources
-Angular CLI Documentation
-
-International Fixed Calendar (Wikipedia)
-   git clone https://github.com/fijolkrzysztof/x13-month-calendar.git
